@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="距离2026年3月3日的倒计时页面">
+    <meta name="keywords" content="倒计时,2026年3月3日,时间">
+    <title>距离2026年3月3日倒计时</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .time-unit {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px 15px;
+            min-width: 150px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .time-unit:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .time-value {
+            font-size: 4rem;
+            font-weight: 700;
+            display: block;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .time-label {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .target-date {
+            font-size: 1.6rem;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin: 40px 0 20px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00b09b, #96c93d);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 1s;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            margin-top: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .share-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .share-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .share-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .time-unit {
+                min-width: 120px;
+                padding: 20px 10px;
+            }
+            
+            .time-value {
+                font-size: 3rem;
+            }
+            
+            .target-date {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .time-unit {
+                min-width: 80px;
+                padding: 15px 5px;
+            }
+            
+            .time-value {
+                font-size: 2.2rem;
+            }
+            
+            .time-label {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>距离2026年3月3日还有</h1>
+        <p class="subtitle">每一天都值得期待</p>
+        
+        <div class="countdown">
+            <div class="time-unit">
+                <span id="days" class="time-value">00</span>
+                <span class="time-label">天</span>
+            </div>
+            <div class="time-unit">
+                <span id="hours" class="time-value">00</span>
+                <span class="time-label">小时</span>
+            </div>
+            <div class="time-unit">
+                <span id="minutes" class="time-value">00</span>
+                <span class="time-label">分钟</span>
+            </div>
+            <div class="time-unit">
+                <span id="seconds" class="time-value">00</span>
+                <span class="time-label">秒</span>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+        
+        <div class="target-date">目标日期: 2026年3月3日</div>
+        
+        <p class="message">
+            每一天都是新的开始，每一刻都值得珍惜。<br>
+            让我们共同期待2026年3月3日的到来！
+        </p>
+        
+        <div class="share-section">
+            <p>分享这个倒计时</p>
+            <button class="share-button" onclick="sharePage()">分享</button>
+            <button class="share-button" onclick="copyLink()">复制链接</button>
+        </div>
+    </div>
+    
+    <div class="fireworks" id="fireworks"></div>
+
+    <script>
+        // 设置目标日期
+        const targetDate = new Date('2026-03-03T00:00:00').getTime();
+        
+        // 更新倒计时
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            
+            // 计算天、时、分、秒
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            // 更新显示
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+            
+            // 更新进度条
+            const totalTime = targetDate - new Date('2025-01-01T00:00:00').getTime();
+            const elapsedTime = now - new Date('2025-01-01T00:00:00').getTime();
+            const progress = Math.min(100, (elapsedTime / totalTime) * 100);
+            document.getElementById('progress').style.width = progress + '%';
+            
+            // 更新页面标题
+            document.title = `距离2026年3月3日还有 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+            
+            // 如果时间到了，显示庆祝信息
+            if (timeLeft < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('.container').innerHTML = `
+                    <h1>🎉 时间到啦！ 🎉</h1>
+                    <p class="subtitle">2026年3月3日已经到来</p>
+                    <div style="font-size: 5rem; margin: 40px 0;">🥳</div>
+                    <p class="message">恭喜！期待的日子终于到来了！</p>
+                `;
+                document.title = "🎉 2026年3月3日已到来！";
+                createFireworks();
+            }
+        }
+        
+        // 创建烟花效果
+        function createFireworks() {
+            const fireworksContainer = document.getElementById('fireworks');
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.style.position = 'absolute';
+                    firework.style.left = Math.random() * 100 + 'vw';
+                    firework.style.top = Math.random() * 100 + 'vh';
+                    firework.style.width = '4px';
+                    firework.style.height = '4px';
+                    firework.style.borderRadius = '50%';
+                    firework.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    firework.style.boxShadow = '0 0 10px 2px currentColor';
+                    firework.style.animation = `firework 1.5s ease-out forwards`;
+                    
+                    fireworksContainer.appendChild(firework);
+                    
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 1500);
+                }, i * 200);
+            }
+            
+            // 添加烟花动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes firework {
+                    0% { transform: translate(0, 0); opacity: 1; }
+                    50% { opacity: 1; }
+                    100% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // 分享功能
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '距离2026年3月3日倒计时',
+                    text: '查看距离2026年3月3日还有多少时间！',
+                    url: window.location.href
+                })
+                .then(() => console.log('分享成功'))
+                .catch((error) => console.log('分享失败', error));
+            } else {
+                // 如果不支持Web Share API，则复制链接到剪贴板
+                copyLink();
+                alert('链接已复制到剪贴板，您可以手动分享！');
+            }
+        }
+        
+        // 复制链接功能
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => {
+                    alert('链接已复制到剪贴板！');
+                })
+                .catch(err => {
+                    console.error('复制失败: ', err);
+                    // 备用方案
+                    const textArea = document.createElement('textarea');
+                    textArea.value = window.location.href;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('链接已复制到剪贴板！');
+                });
+        }
+        
+        // 初始调用
+        updateCountdown();
+        
+        // 每秒更新一次
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
