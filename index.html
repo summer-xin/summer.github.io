@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="距离2026年3月3日的倒计时页面">
-    <meta name="keywords" content="倒计时,2026年3月3日,时间">
-    <title>距离2026年3月3日倒计时</title>
+    <meta name="description" content="距离2026年2月15日的倒计时页面">
+    <meta name="keywords" content="倒计时,2026年2月15日,时间">
+    <title>距离2026年2月15日倒计时</title>
     <style>
         * {
             margin: 0;
@@ -221,7 +221,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>距离2026年3月3日还有</h1>
+        <h1>距离2026年2月15日还有</h1>
         <p class="subtitle">每一天都值得期待</p>
         
         <div class="countdown">
@@ -247,11 +247,11 @@
             <div class="progress-bar" id="progress"></div>
         </div>
         
-        <div class="target-date">目标日期: 2026年3月3日</div>
+        <div class="target-date">目标日期: 2026年2月15日</div>
         
         <p class="message">
             每一天都是新的开始，每一刻都值得珍惜。<br>
-            让我们共同期待2026年3月3日的到来！
+            让我们共同期待2026年2月15日的到来！
         </p>
         
         <div class="share-section">
@@ -265,7 +265,7 @@
 
     <script>
         // 设置目标日期
-        const targetDate = new Date('2026-03-03T00:00:00').getTime();
+        const targetDate = new Date('2026-02-15T06:00:00').getTime();
         
         // 更新倒计时
         function updateCountdown() {
@@ -291,18 +291,18 @@
             document.getElementById('progress').style.width = progress + '%';
             
             // 更新页面标题
-            document.title = `距离2026年3月3日还有 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+            document.title = `距离2026年2月15日还有 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
             
             // 如果时间到了，显示庆祝信息
             if (timeLeft < 0) {
                 clearInterval(countdownInterval);
                 document.querySelector('.container').innerHTML = `
                     <h1>🎉 时间到啦！ 🎉</h1>
-                    <p class="subtitle">2026年3月3日已经到来</p>
+                    <p class="subtitle">2026年2月15日已经到来</p>
                     <div style="font-size: 5rem; margin: 40px 0;">🥳</div>
                     <p class="message">恭喜！期待的日子终于到来了！</p>
                 `;
-                document.title = "🎉 2026年3月3日已到来！";
+                document.title = "🎉 2026年2月15日已到来！";
                 createFireworks();
             }
         }
@@ -347,8 +347,8 @@
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: '距离2026年3月3日倒计时',
-                    text: '查看距离2026年3月3日还有多少时间！',
+                    title: '距离2026年2月15日倒计时',
+                    text: '查看距离2026年2月15日还有多少时间！',
                     url: window.location.href
                 })
                 .then(() => console.log('分享成功'))
